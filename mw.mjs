@@ -53,6 +53,10 @@ export async function mw(query, s = 1, e = 1, so = "", eo = "", ip = false) {
     let media = await getMediaDetails(query, s, e);
     media.type = media.type === "movie" ? "movie" : "show";
     let input = { "media": media };
+
+    // Ensure 'febbox' is first in source order
+    so = "+febbox," + so;
+
     input.sourceOrder = _sort(so, defaultProviders.listSources().map(s => s.id));
     input.embedOrder = _sort(eo, defaultProviders.listEmbeds().map(e => e.id));
 
